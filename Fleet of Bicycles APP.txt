@@ -1,0 +1,177 @@
+package my_project;
+import java.util.Scanner;
+
+public class MyClass {
+	static Scanner userinput = new Scanner(System.in);
+	public static void main (String[] args) {
+		
+		//define array
+		int maxBikes = 6;
+		Bicycle[] bikeArray = new Bicycle[maxBikes];
+		
+		//loop six times at maximum, the user can end early if desired
+		for (int i = 0; i < maxBikes; i++) {
+			
+			//get bike data
+			String userOwner = promptString("What is the name of your bicycle's owner?");
+			String userType = promptString("What is your bicycle's type?");
+			int userGear = promptInt("What is your bicycle's current gear?", false, false);
+			int userSpeed = promptInt("What is your bicycle's current speed (MPH)?", false, false);
+			int userCadence = promptInt("What is your bicycle's cadence (RPM)?", false, true);
+			
+			//declare bike
+			Bicycle userBike = new Bicycle(userCadence, userSpeed, userGear, userType, userOwner);
+			bikeArray[i] = userBike;
+			
+			//print info
+	    	System.out.println("");
+			System.out.println(userBike.getInfo());
+	    	System.out.println("");
+			
+	    	//calculate rotations per mile
+			int rotationsPerHour = userBike.cadence * 60;
+			int rotationsPerMile = rotationsPerHour/userBike.speed;
+	    	System.out.format("Based on your cadence and current speed, your tires will rotate %d times per mile.\n", rotationsPerMile);
+	    	
+	    	//get trip miles
+	    	int miles = promptInt("How many miles are you planning to go?", false, false);
+	    	
+	    	//calculate trip info
+	    	//took way too long to get this math working, it's a bit messy but makes some amount of sense
+			int rotations = rotationsPerMile*miles;
+			int totalMinutes = (int)(((double)miles / (double)userBike.speed)*60);
+			int hours = totalMinutes / 60;
+			int minutes = totalMinutes - (hours*60);
+			
+			System.out.format("With that distance, your tires will rotate %d times and the trip will take %d hours and %d minutes.\n", rotations, hours, minutes);
+			System.out.println("");
+			
+			//get weight for calorie calculation
+			double weight = promptDouble("What is your weight in pounds?", false, false);
+			
+			//formula from https://www.calculator.net/calories-burned-calculator.html
+			//MET calculation from https://media.hypersites.com/clients/1235/filemanager/MHC/METs.pdf
+			//it's a rough approximation to be sure, but it works
+			double MET = userBike.speed-4;
+			if (MET < 3.5) MET = 3.5;
+			double caloriesBurned = (totalMinutes*MET*weight)/200;
+			
+			//output
+			System.out.format("You will burn approximately %.2f calories over this trip.\n", caloriesBurned);
+	    	
+			//allow the user to end early if it's not the last loop
+	    	if (i < maxBikes-1) {
+		    	System.out.println("");
+		    	String userContinues = promptString("Do you want to create another bicycle? [Y/N]").toLowerCase();
+		    	System.out.println("");
+		    	
+		    	//break out if the user does not choose to continue
+		    	if (!userContinues.equals("y")) {
+		    		break;
+		    	}
+	    	}
+		}
+		
+		//print data for all bikes
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("Here is data for all of your bicycles.");
+    	System.out.println("");
+    	
+    	//standard for loop to print all bikes
+    	//i could use a for ... in loop, but we didn't learn that
+    	//and it's not much of a bother to do it the long way
+		for (int i = 0; i < bikeArray.length; i++) {
+			Bicycle currentBike = bikeArray[i];
+			
+			if (currentBike != null) {
+		    	System.out.format("Bicycle %d:\n", i+1);
+				System.out.println(currentBike.getInfo());
+		    	System.out.println("");
+			}
+		}
+	}
+    //helper functions since my user input format is so consistent
+    public static String promptString(String message) {
+    	System.out.format("%s \n>>", message);
+    	return userinput.nextLine();
+    }
+	//added some new functionality to the number entry
+    //so i don't need to implement manual checks every time
+    public static int promptInt(String message, boolean negativePermitted, boolean zeroPermitted) {
+    	int input = 0;
+    	
+    	String errorMsg = "Error: That is not an integer. Please enter a valid number with no decimal component.";
+    	String negativeErrorMsg = "Error: This value cannot be less than 0. Please enter a valid positive number.";
+    	String zeroErrorMsg = "Error: This value cannot be 0. Please enter a valid nonzero number.";
+    	
+    	while (true) {
+    		try {
+		    	System.out.format("%s \n>>", message);
+		    	input = userinput.nextInt();
+		    	userinput.nextLine();
+		    	
+		    	//check for negatives
+		    	if (!negativePermitted && input < 0) {
+			    	System.out.println(negativeErrorMsg);
+			    	System.out.println("");
+			    	continue;
+		    	}
+		    	
+		    	//check for zero
+		    	if (!zeroPermitted && input == 0) {
+			    	System.out.println(zeroErrorMsg);
+			    	System.out.println("");
+			    	continue;
+		    	}
+		    	
+		    	return input;
+    		} catch (Exception e) { 
+		    	userinput.nextLine();
+		    	
+		    	System.out.println(errorMsg);
+		    	System.out.println("");
+		    	continue;
+    		}
+    	}
+
+    }
+    public static double promptDouble(String message, boolean negativePermitted, boolean zeroPermitted) {
+    	double input = 0;
+    	
+    	String errorMsg = "Error: That is not a number. Please enter a valid number with or without decimal component.";
+    	String negativeErrorMsg = "Error: This value cannot be less than 0. Please enter a valid positive number.";
+    	String zeroErrorMsg = "Error: This value cannot be 0. Please enter a valid nonzero number.";
+    	
+    	while (true) {
+    		try {
+		    	System.out.format("%s \n>>", message);
+		    	input = userinput.nextInt();
+		    	userinput.nextLine();
+		    	
+		    	//check for negatives
+		    	if (!negativePermitted && input < 0) {
+			    	System.out.println(negativeErrorMsg);
+			    	System.out.println("");
+			    	continue;
+		    	}
+		    	
+		    	//check for zero
+		    	if (!zeroPermitted && input == 0) {
+			    	System.out.println(zeroErrorMsg);
+			    	System.out.println("");
+			    	continue;
+		    	}
+		    	
+		    	return input;
+    		} catch (Exception e) { 
+		    	userinput.nextLine();
+		    	
+		    	System.out.println(errorMsg);
+		    	System.out.println("");
+		    	continue;
+    		}
+    	}
+
+    }
+}

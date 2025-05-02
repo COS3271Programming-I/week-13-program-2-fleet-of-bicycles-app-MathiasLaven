@@ -1,0 +1,100 @@
+What is the name of your bicycle's owner? 
+>>Jeremy
+What is your bicycle's type? 
+>>mountain
+What is your bicycle's current gear? 
+>>6
+What is your bicycle's current speed (MPH)? 
+>>15
+What is your bicycle's cadence (RPM)? 
+>>30
+
+Jeremy owns this mountain bicycle.
+Currently we are in gear 6 and going 15 MPH.
+The cadence is 30 RPM.
+
+Based on your cadence and current speed, your tires will rotate 120 times per mile.
+How many miles are you planning to go? 
+>>7
+With that distance, your tires will rotate 840 times and the trip will take 0 hours and 28 minutes.
+
+What is your weight in pounds? 
+>>150
+You will burn approximately 231.00 calories over this trip.
+
+Do you want to create another bicycle? [Y/N] 
+>>Y
+
+What is the name of your bicycle's owner? 
+>>Sarah
+What is your bicycle's type? 
+>>hybrid
+What is your bicycle's current gear? 
+>>3
+What is your bicycle's current speed (MPH)? 
+>>10
+What is your bicycle's cadence (RPM)? 
+>>60
+
+Sarah owns this hybrid bicycle.
+Currently we are in gear 3 and going 10 MPH.
+The cadence is 60 RPM.
+
+Based on your cadence and current speed, your tires will rotate 360 times per mile.
+How many miles are you planning to go? 
+>>10
+With that distance, your tires will rotate 3600 times and the trip will take 1 hours and 0 minutes.
+
+What is your weight in pounds? 
+>>178
+You will burn approximately 320.40 calories over this trip.
+
+Do you want to create another bicycle? [Y/N] 
+>>Y
+
+What is the name of your bicycle's owner? 
+>>Elise
+What is your bicycle's type? 
+>>road
+What is your bicycle's current gear? 
+>>1
+What is your bicycle's current speed (MPH)? 
+>>10
+What is your bicycle's cadence (RPM)? 
+>>90
+
+Elise owns this road bicycle.
+Currently we are in gear 1 and going 10 MPH.
+The cadence is 90 RPM.
+
+Based on your cadence and current speed, your tires will rotate 540 times per mile.
+How many miles are you planning to go? 
+>>3
+With that distance, your tires will rotate 1620 times and the trip will take 0 hours and 18 minutes.
+
+What is your weight in pounds? 
+>>130
+You will burn approximately 70.20 calories over this trip.
+
+Do you want to create another bicycle? [Y/N] 
+>>N
+
+
+
+Here is data for all of your bicycles.
+
+Bicycle 1:
+Jeremy owns this mountain bicycle.
+Currently we are in gear 6 and going 15 MPH.
+The cadence is 30 RPM.
+
+Bicycle 2:
+Sarah owns this hybrid bicycle.
+Currently we are in gear 3 and going 10 MPH.
+The cadence is 60 RPM.
+
+Bicycle 3:
+Elise owns this road bicycle.
+Currently we are in gear 1 and going 10 MPH.
+The cadence is 90 RPM.
+
